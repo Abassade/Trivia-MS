@@ -5,10 +5,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/Questdb', { useNewUrlParser: true }); 
+mongoose.connect('mongodb://localhost/Questiondb',{ useNewUrlParser: true }); 
 
-
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const route = require('./routes/route');
