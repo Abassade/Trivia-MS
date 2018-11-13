@@ -1,5 +1,7 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+const util = require('../controllers/utils');
  Schema = mongoose.Schema;
+ const my_date = util.day+", "+util.date+"-"+util.num_month+"-"+util.year;
 
 var questionSchema = new Schema({
     question  : {type: String, required: true},
@@ -10,7 +12,7 @@ var questionSchema = new Schema({
         D: {type: String, default: "null"},
     },
     answer: {type: String, required: true},
-    date_added: {type: Date, default: Date.now}
+    date_added: {type: String, default: my_date}
 });
 
 module.exports = mongoose.model('Question', questionSchema);
