@@ -12,7 +12,7 @@ var questionSchema = new Schema({
         D: {type: String, default: "null"},
     },
     answer: {type: String, required: true},
-    date_added: {type: String, default: my_date}
+    date_added: {type: String, default: util(new Date)}
 });
 
 module.exports = mongoose.model('Question', questionSchema);
