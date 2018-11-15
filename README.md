@@ -41,6 +41,6 @@ Base     				 | /                    |
 Get all posted data [GET] 	     | /question           |
 Get a single product[GET]     | /question/:id        |`id` e.g `ft-90`
 Add a product [POST]  	 | /question/       | {`question`,`options:{A, B, C, D}`,`answer`}
-Update a product [PUT] | /question/:id | same as post body
+Update a product [PUT] | /question/:id | repeat the same thing as POST
 Delete a data [DELETE]| /question/:id |
 Delete all data [DELETE]| /question |
