@@ -1,6 +1,10 @@
 module.exports = function(app) {
     const controller = require('../controllers/controller');
   
+    // base url
+    app.route('/')
+    .get(controller.baseUrl);
+
   // endpoint for non params body  
     app.route('/question')
       .get(controller.list_all_questions)

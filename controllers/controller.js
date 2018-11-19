@@ -1,6 +1,16 @@
 var mongoose = require('mongoose'),
 Question = require('../models/baseSchema')
 
+exports.baseUrl = function(req, res){
+
+  const response = {
+    error: false,
+    statusCode: 200,
+    message: 'This is base url'
+  }
+  res.send(response);
+}
+
 exports.list_all_questions = function(req, res) {
     Question.find({}, function(err, quest) {
       if (err)
