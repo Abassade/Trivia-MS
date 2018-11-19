@@ -10,7 +10,7 @@ exports.list_all_questions = function(req, res) {
   };
   
   exports.create_a_question = function(req, res) {
-    var new_question = new Question({
+    let new_question = new Question({
         question: req.body.question,
         option_a: req.body.A,
         option_b: req.body.B,
@@ -29,7 +29,7 @@ exports.list_all_questions = function(req, res) {
   
   
   exports.read_a_question = function(req, res) {
-    Question.findById(req.params.taskId, function(err, quest) {
+    Question.findById(req.params.id, function(err, quest) {
       if (err)
         res.send(err);
       res.json(quest);
@@ -53,7 +53,13 @@ exports.list_all_questions = function(req, res) {
        function(err, quest) {
       if (err)
         res.send(err);
-      res.json({ message: `Question with ${req.params.id} successfully deleted` });
+        const response = {
+          error:false,
+          statusCode: 202,
+          message: `Question with
+           ${req.params.id} successfully deleted`
+        }
+      res.json(response);
     });
   
   };
@@ -63,7 +69,12 @@ exports.list_all_questions = function(req, res) {
       function(err, quest) {
      if (err)
        res.send(err);
-     res.json({ message: 'Questions successfully deleted' });
+       const response = {
+        error:false,
+        statusCode: 202,
+        message: 'Questions successfully deleted'
+      }
+     res.json(response);
    });
   
   };

@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    var controller = require('../controllers/controller');
+    const controller = require('../controllers/controller');
   
     
     app.route('/question')
