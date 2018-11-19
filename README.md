@@ -16,11 +16,14 @@ Ensure you have the following software installed on your machine
 npm install express --save
 npm install -g nodemon --save -dev
 npm install mongoose --save
+npm install body-parser --save
 ```
 
 ## How to run the api
+### Use the second command, if you have nodemon iinstalled globaly
 ```bash
 node index.js
+nodemon index.js
 ```
 
 
