@@ -1,4 +1,4 @@
-var mongoose = require('mongoose'),
+
 Question = require('../models/baseSchema')
 
 exports.baseUrl = function(req, res){

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const util = require('../controllers/utils');
  Schema = mongoose.Schema;
 
-const questionSchema = new Schema({
+  const questionSchema = new Schema({
     question  : {type: String, required: true},
     options   : {
         A: {type: String, default: "null"},
