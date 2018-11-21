@@ -20,6 +20,7 @@ describe('BaseSchema', function() {
       done();
     });
   });
+  
   afterEach(function(done){
     done();
   });
@@ -33,6 +34,7 @@ describe('BaseSchema', function() {
            res.body.should.be.a('array');
            res.body[0].should.have.property('_id');
            res.body[0].should.have.property('question');
+           res.body[0].should.have.property('answer');
         done();
       });
   });
