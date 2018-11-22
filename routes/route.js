@@ -5,6 +5,10 @@ module.exports = app=> {
     app.route('/')
     .get(controller.baseUrl);
 
+    //get for admin in other view question
+    app.route('/admin')
+    .get(controller.list_all_for_admin);
+
   // endpoint for non params body  
     app.route('/question')
       .get(controller.list_all_questions)

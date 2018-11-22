@@ -13,20 +13,25 @@ exports.baseUrl = function(req, res){
 }
 
 exports.list_all_questions = function(req, res) {
-    Question.find({}, function(err, quest) {
-      if (err)
-        res.send(err);
+  const query = Question.find({})
+  .select({"answer": 0, "__v":0});
 
-        const get_res = {
-          error:false,
-          statusCode:200,
-          data:quest
-        }
-
-      res.json(quest);
-    });
-  };
+  query.exec((err, quest)=> {
+    if (err) return next(err);
+    res.send(quest);
+      });
+  };  
   
+  exports.list_all_for_admin = function(req, res) {
+    const query = Question.find({});
+  
+    query.exec((err, quest)=> {
+      if (err) return next(err);
+      res.send(quest);
+        });
+    };  
+    
+
   exports.create_a_question = function(req, res) {
     let new_question = new Question({
         question: req.body.question,
