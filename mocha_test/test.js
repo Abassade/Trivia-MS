@@ -9,45 +9,50 @@ var should = chai.should();
 chai.use(chaiHttp);
 
 
-describe('BaseSchema', function() {
+describe('BaseSchema', ()=> {
 
-  beforeEach(function(done){
+  beforeEach( done=>{
+
     var newQuestion = new Question({
         question  : "What is your name",
         answer: "Abass",
     });
-    newQuestion.save(function(err) {
+    newQuestion.save((err)=> {
+
       done();
     });
   });
-  
-  afterEach(function(done){
+
+  afterEach((done)=>{
     done();
   });
 
-  it('should list ALL questions on /question GET', function(done) {
+  it('should list ALL questions on /question GET', done=> {
     chai.request(server)
            .get('/question')
-           .end(function(err, res){
+           .end((err, res)=>{
            res.should.have.status(200);
            res.should.be.json;
            res.body.should.be.a('array');
            res.body[0].should.have.property('_id');
            res.body[0].should.have.property('question');
            res.body[0].should.have.property('answer');
+
         done();
+
       });
+
   });
 
-  it('should list a SINGLE question on /question/:id GET', function(done) {
+  it('should list a SINGLE question on /question/:id GET', done=> {
       var newQuestion = new Question({
         question: 'How old are you',
         answer: '14'
       });
-      newQuestion.save(function(err, data) {
+      newQuestion.save( (err, data)=> {
         chai.request(server)
           .get('/question/'+data.id)
-          .end(function(err, res){
+          .end( (err, res)=>{
             res.should.have.status(200);
             res.should.be.json;
             res.body.should.be.a('object');

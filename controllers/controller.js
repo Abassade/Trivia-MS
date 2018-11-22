@@ -23,7 +23,7 @@ exports.list_all_questions = function(req, res) {
           data:quest
         }
 
-      res.json(get_res);
+      res.json(quest);
     });
   };
   

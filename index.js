@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/Questiondb',{ useNewUrlParser: true }); 
 
-// using bodyparser to accept request body in json and url
+// using middleware bodyparser to accept request body in json and url
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -22,7 +22,7 @@ app.listen(port, ()=>{
 });
 
 // use the function to feedback the error status
-app.use(function(req, res) {
+app.use((req, res)=> {
     res.status(404).send({url: req.originalUrl + ' not found'})
   });
 
