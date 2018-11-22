@@ -27,6 +27,20 @@ nodemon index.js
 ```
 
 
+## How to run the test (Mocha chai)
+Before using the test, you have to get mocha and cha installed
+```bash
+npm mocha --save -dev
+npm chai --save -dev
+npm chai-http --save -dev
+```
+Then after, copy the below code to your command to run the test
+
+```bash
+mocha mocha_test/test.js
+```
+
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -42,6 +56,7 @@ NAME     			     | END POINT            |  PARAMS / BODY DATA
 -------------------------| -------------        | ---------------
 Base     				 | /                    |
 Get all posted data [GET] 	     | /question           |
+(Strictly for admin) Get all posted data with answers [GET] 	     | /admin           |
 Get a single data [GET]     | /question/:id        |`id` e.g `ft-90`
 Add a data [POST]  	 | /question/       | {`question`,`options:{A, B, C, D}`,`answer`}
 Update a data [PUT] | /question/:id | repeat the same thing as POST
