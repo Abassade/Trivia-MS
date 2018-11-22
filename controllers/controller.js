@@ -18,7 +18,11 @@ exports.list_all_questions = function(req, res) {
 
   query.exec((err, quest)=> {
     if (err) return next(err);
-    res.send(quest);
+    res.send({
+      error:false,
+      statusCode:200,
+      data:quest
+    });
       });
   };  
   
@@ -27,10 +31,13 @@ exports.list_all_questions = function(req, res) {
   
     query.exec((err, quest)=> {
       if (err) return next(err);
-      res.send(quest);
-        });
-    };  
-    
+      res.send({
+        error:false,
+        statusCode:200,
+        data:quest
+      });
+    });  
+  }
 
   exports.create_a_question = function(req, res) {
     let new_question = new Question({
@@ -59,11 +66,23 @@ exports.list_all_questions = function(req, res) {
   
   
   exports.read_a_question = function(req, res) {
-    Question.findById(req.params.id, function(err, quest) {
-      if (err)
-        res.send(err);
-      res.json(quest);
-    });
+   const query = Question.findById(req.params.id)
+   .select({"__v":0, "answer":0});
+
+   query.exec((err, quest)=>{
+    
+    if(err){
+
+     res.send({error:true,
+             statusCode:404
+            });
+    }
+    else{
+      res.send({error:false,
+             statusCode:200,
+               data:quest});
+    }
+   });
   };
   
   
