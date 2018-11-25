@@ -6,10 +6,10 @@ const util = require('../controllers/utils');
     question  : {type: String,
                 required: true},
     options   : {
-        A: {type: String, default: "null"},
-        B: {type: String, default: "null"},
-        C: {type: String, default: "null"},
-        D: {type: String, default: "null"},
+        A: {type: String, required: true},
+        B: {type: String, required: true},
+        C: {type: String, required: true},
+        D: {type: String, required: true},
     },
     answer: {
          type: String,

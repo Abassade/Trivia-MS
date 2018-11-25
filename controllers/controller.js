@@ -58,14 +58,7 @@ exports.list_all_questions = function(req, res) {
   }
 
   exports.create_a_question = (req, res)=> {
-    let new_question = new Question({
-        question: req.body.question,
-        option_a: req.body.A,
-        option_b: req.body.B,
-        option_c: req.body.C,
-        option_d: req.body.D,
-        answer: req.body.answer
-    });
+    let new_question = new Question(req.body);
 
 
     if(req.body.question == null || undefined 
@@ -100,7 +93,7 @@ exports.list_all_questions = function(req, res) {
             message: `post with id ${quest._id} was succesfull`
           }
       
-            res.json(post_res);
+          res.json(post_res);
         }
     
       });
@@ -144,7 +137,7 @@ exports.list_all_questions = function(req, res) {
                error:false,
                statusCode:200,
                message: 'The response is ok',
-                 data:quest
+               data:quest
                 });
               }
         });
