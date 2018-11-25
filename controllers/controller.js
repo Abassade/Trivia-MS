@@ -16,21 +16,39 @@ exports.list_all_questions = function(req, res) {
   const query = Question.find({})
   .select({"answer": 0, "__v":0});
 
-  query.exec((err, quest)=> {
-    if (err) return next(err);
-    res.send({
-      error:false,
-      statusCode:200,
-      data:quest
-    });
+  query.sort('-date_added')
+  .exec((err, quest)=> {
+    if (err) {
+      res.send({
+        error:true,
+        statusCode:404,
+        message:'Database is empty'
+      })
+    }
+    else{
+
+      res.send({
+        error:false,
+        statusCode:200,
+        data:quest
+      });
+          }
       });
   };  
   
   exports.list_all_for_admin = function(req, res) {
     const query = Question.find({});
   
-    query.exec((err, quest)=> {
-      if (err) return next(err);
+    query.sort('-date_added')
+    .exec((err, quest)=> {
+      if (err){ return next(err); }
+      if(quest == null || undefined){
+
+        res.send({
+          error:true,
+          statusCode:404
+        });
+      }
       res.send({
         error:false,
         statusCode:200,
@@ -39,7 +57,7 @@ exports.list_all_questions = function(req, res) {
     });  
   }
 
-  exports.create_a_question = function(req, res) {
+  exports.create_a_question = (req, res)=> {
     let new_question = new Question({
         question: req.body.question,
         option_a: req.body.A,
@@ -49,40 +67,91 @@ exports.list_all_questions = function(req, res) {
         answer: req.body.answer
     });
 
-    new_question.save(function(err, quest) {
-      if (err){
-        res.send(err);
-        console,log('error ', err);
+
+    if(req.body.question == null || undefined 
+      || req.body.answer == null | undefined){
+      //  console.log('question and answer are required');
+        res.send({
+          error:404,
+          message: 'questions and answer are required',
+          advice: 'Kindly provide question and answer in json form'
+        });
+
     }
-    const post_res = {
-      error: false,
-      statusCode: 202,
-      message: `post with id ${quest._id} was succesfull`
+    else{
+
+      new_question.save( (err, quest)=> {
+
+        if(err){
+  
+          console.log('An error occured', err);
+  
+          res.send({
+            statusCode:404,
+            message: 'An error occured, please ensure you pass in required fields',
+            databaseinfo: 'Ensure mongodb is up and running'
+          });
+        }
+        else{
+  
+          const post_res = {
+            error: false,
+            statusCode: 202,
+            message: `post with id ${quest._id} was succesfull`
+          }
+      
+            res.json(post_res);
+        }
+    
+      });
     }
 
-      res.json(post_res);
-    });
+    
   };
+
   
   
   exports.read_a_question = function(req, res) {
-   const query = Question.findById(req.params.id)
+
+    Question.findOne( {_id: req.params.id}, (err, data)=>{
+     // console.log('data id', data);
+
+      if (data == null ||undefined) {
+        res.send({
+          statusCode: 400,
+          message: `The passed id: ${req.params.id} was not found`
+        });
+        
+      } 
+      
+      else {
+        
+        const query = Question.findById(req.params.id)
    .select({"__v":0, "answer":0});
 
-   query.exec((err, quest)=>{
+    query.exec((err, quest)=>{
     
-    if(err){
+      if(err){
+  
+       res.send({
+               error:true,
+               statusCode:404,
+               message: 'An error occured'
+              });
+      }
+      else{
+        res.send({
+               error:false,
+               statusCode:200,
+               message: 'The response is ok',
+                 data:quest
+                });
+              }
+        });
+      }
 
-     res.send({error:true,
-             statusCode:404
-            });
-    }
-    else{
-      res.send({error:false,
-             statusCode:200,
-               data:quest});
-    }
-   });
+    });
+   
   };
   
   
@@ -120,7 +189,7 @@ exports.list_all_questions = function(req, res) {
   
   exports.delete_all = function(req, res) {
   Question.deleteMany({},
-      function(err, quest) {
+      function(err) {
      if (err)
        res.send(err);
        const response = {

@@ -6,7 +6,14 @@ const mongoose = require('mongoose');
 
 // connecting to mongodb 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/Questiondb',{ useNewUrlParser: true }); 
+mongoose.connect('mongodb://localhost/Questiondb',
+{ useNewUrlParser: true },
+    error =>{
+
+    if(error) console.log('Database Error', error);
+
+    console.log(' Database Successfully connected');
+}); 
 
 // using middleware bodyparser to accept request body in json and url
 app.use(bodyParser.urlencoded({ extended: false }));
