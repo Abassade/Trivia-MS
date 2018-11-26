@@ -33,10 +33,7 @@ describe('BaseSchema', ()=> {
            res.body.should.have.property('error');
            res.body.error.should.be.equal(false);
            res.body.data.should.not.have.property('__v');
-          //  res.body.data[0].should.have.property('_id');
-          //  res.body.data[0].should.have.property('question');
-          //  res.body.data[0].should.not.have.property('answer');
-          //  res.body.data[0].should.have.property('options');
+          
         done();
 
       });
@@ -53,10 +50,7 @@ describe('BaseSchema', ()=> {
            res.body.data.should.be.a('array');
            res.body.should.have.property('error');
            res.body.error.should.be.equal(false);
-          //  res.body.data[0].should.have.property('_id');
-          //  res.body.data[0].should.have.property('__v');
-          //  res.body.data[0].should.have.property('question');
-          //  res.body.data[0].should.have.property('answer');
+          
 
         done();
 
@@ -81,12 +75,7 @@ describe('BaseSchema', ()=> {
               res.body.should.be.a('object');
               res.body.should.have.property('statusCode');
               res.body.statusCode.should.equal(400);
-              // res.body.data.should.have.property('_id');
-              // res.body.data.should.have.property('question');
-              // res.body.data.should.not.have.property('answer');
-              // res.body.data.should.not.have.property('__v');
-              // res.body.data.question.should.equal('What is th capital of oyo state ?');
-              // res.body.data._id.should.equal(data.id);
+              
             done();
           });
       });
