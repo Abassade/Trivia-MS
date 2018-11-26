@@ -77,7 +77,7 @@ exports.list_all_questions = function(req, res) {
 
         if(err){
   
-          console.log('An error occured', err);
+          console.log('POST ERROR : ', err);
   
           res.send({
             statusCode:404,
@@ -109,7 +109,7 @@ exports.list_all_questions = function(req, res) {
     Question.findOne( {_id: req.params.id}, (err, data)=>{
      // console.log('data id', data);
 
-      if (data == null ||undefined) {
+      if (data == null || undefined) {
         res.send({
           statusCode: 400,
           message: `The passed id: ${req.params.id} was not found`

@@ -1,11 +1,11 @@
-module.exports = app=> {
+module.exports = app => {
     const controller = require('../controllers/controller');
   
     // base url
     app.route('/')
     .get(controller.baseUrl);
 
-    //get for admin in other view question
+    //get for admin in other to view everything
     app.route('/admin')
     .get(controller.list_all_for_admin);
 
